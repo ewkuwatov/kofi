@@ -10,7 +10,8 @@ return new class extends Migration
     {
         Schema::create('subscribers', function (Blueprint $table): void {
             $table->id();
-            $table->string('email', 254)->unique();
+            // Keep the unique index below MySQL's legacy 767-byte limit.
+            $table->string('email', 191)->unique();
             $table->timestamps();
         });
     }
